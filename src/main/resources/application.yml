@@ -1,3 +1,27 @@
 server:
   ssl:
     key-store: classpath:thekeystore
+
+cas:
+  authn:
+    jdbc:
+      query:
+        - driver-class: org.mariadb.jdbc.Driver
+          url: jdbc:mariadb://120.24.108.229:3306/lsj_user?characterEncoding=UTF-8&application-name=cas
+          user: root
+          password: root
+          sql: select pwd from t_user_info where userid=?
+          field-password: pwd
+          password-encoder:
+            type: DEFAULT
+            encoding-algorithm: MD5
+##设置安全为true
+  tgc:
+    secure: true
+##开启识别json文件，默认false
+  serviceRegistry:
+    initFromJson: true
+
+
+
+
