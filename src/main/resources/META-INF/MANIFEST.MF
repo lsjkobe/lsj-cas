@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: cas-server-support-thymeleaf
+Implementation-Title: cas-server-support-thymeleaf
+Implementation-Vendor: org.apereo.cas
+Created-By: org.apereo.cas
+Implementation-Date: 2022-04-11T09:34:50.712901Z[Etc/UTC]
+Specification-Version: N/A
+Implementation-Version: 6.6.0-SNAPSHOT
+

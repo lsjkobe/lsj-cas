@@ -1,0 +1,3 @@
+org.apereo.cas.config.CasThymeleafConfiguration=org.springframework.stereotype.Component
+org.apereo.cas.config.CasThymeleafConfiguration$ThymeleafViewResolverConfiguration=org.springframework.stereotype.Component
+org.apereo.cas.config.CasThymeleafConfiguration$ThymeleafWebflowConfiguration=org.springframework.stereotype.Component
