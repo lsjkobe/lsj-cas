@@ -13,8 +13,9 @@ cas:
           sql: select pwd from t_user_info where userid=?
           field-password: pwd
           password-encoder:
-            type: DEFAULT
-            encoding-algorithm: MD5
+#            type: DEFAULT
+#            encoding-algorithm: MD5
+            type: SCRYPT
 ##设置安全为true
   tgc:
     secure: true
