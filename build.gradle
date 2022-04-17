@@ -1,6 +1,8 @@
 import org.apache.tools.ant.taskdefs.condition.*
 import org.gradle.internal.logging.text.*
 import org.apereo.cas.metadata.*
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 import java.nio.file.*
 import static org.gradle.internal.logging.text.StyledTextOutput.Style
 
@@ -118,7 +120,7 @@ dependencies {
     * Do NOT modify the lines below or else you will risk breaking dependency management.
     */
     implementation enforcedPlatform("org.apereo.cas:cas-server-support-bom:${project.'cas.version'}")
-    implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+    implementation platform(SpringBootPlugin.BOM_COORDINATES)
 
     /**
      * CAS dependencies and modules may be listed here.
@@ -131,6 +133,12 @@ dependencies {
     implementation "org.apereo.cas:cas-server-core-api-configuration-model"
     implementation "org.apereo.cas:cas-server-webapp-init"
     implementation "org.apereo.cas:cas-server-support-jdbc:${project.'cas.version'}"
+
+//    auth
+    implementation "org.apereo.cas:cas-server-core-authentication-api:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-core-configuration-api:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-core-webflow:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-core-webflow-api:${project.'cas.version'}"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")

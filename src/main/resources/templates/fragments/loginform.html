@@ -143,6 +143,27 @@
                         </div>
                     </section>
 
+                    <section class="cas-field my-3" id="userCaptcha">
+                        <div class="d-flex">
+                            <label for="captcha" class="mdc-text-field mdc-text-field--outlined">
+                                <input class="mdc-text-field__input"
+                                       id="captcha"
+                                       size="6"
+                                       type="text"
+                                       th:field="*{captcha}"
+                                       autocomplete="off"/>
+
+                                <span class="mdc-notched-outline">
+                                                    <span class="mdc-notched-outline__leading"></span>
+                                                    <span class="mdc-notched-outline__notch">
+                                                        <span class="mdc-floating-label" th:utext="#{screen.welcome.label.captcha}">验证码</span>
+                                                    </span>
+                                                    <span class="mdc-notched-outline__trailing"></span>
+                                                </span>
+                            </label>
+                        </div>
+                    </section>
+
                     <section id="authnSourceSection" class="cas-field form-group my-3"
                              th:if="${availableAuthenticationHandlerNames != null}">
                         <div class="d-flex">

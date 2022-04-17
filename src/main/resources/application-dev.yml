@@ -23,6 +23,7 @@ cas:
 #            type: DEFAULT
 #            encoding-algorithm: MD5
             type: SCRYPT
+          order: 100
 ##设置安全为true
   tgc:
     secure: true
