@@ -1,6 +1,13 @@
 server:
   ssl:
-    key-store: classpath:thekeystore
+    enabled: true
+#    key-store: classpath:thekeystore
+#    key-store-password: li936339745
+#    key-password: li936339745
+    key-store: classpath:7619605_sso.leoli.top.pfx
+    key-store-password: yy5ChUqe
+    key-password: yy5ChUqe
+  port: 443
 
 cas:
   authn:
@@ -22,6 +29,11 @@ cas:
 ##开启识别json文件，默认false
   serviceRegistry:
     initFromJson: true
+
+
+
+  server:
+    name: sso.leoli.top:443
 
 
 
