@@ -35,6 +35,8 @@ cas:
 
   server:
     name: sso.leoli.top:443
+  theme:
+    default-theme-name: lsjtest
 
 
 
