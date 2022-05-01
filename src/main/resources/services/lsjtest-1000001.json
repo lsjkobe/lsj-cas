@@ -1,6 +1,6 @@
 {
   "@class": "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId": "^(https|imaps)://.*",
+  "serviceId": "^(https|imaps|http)://.*",
   "name": "HTTPS and IMAPS",
   "theme": "lsjtest",
   "id": 1000001,

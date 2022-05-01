@@ -30,6 +30,8 @@ cas:
 ##开启识别json文件，默认false
   serviceRegistry:
     initFromJson: true
+    json:
+      location: classpath:services
 
 
 
