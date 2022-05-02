@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -26,7 +26,10 @@
 
 <body>
     <script th:replace="fragments/scripts"></script>
-
+    <script type="text/javascript" th:src="@{/js/react/react.development.js}"></script>
+    <script type="text/javascript" th:src="@{/js/react/react-dom.development.js}"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script type="text/javascript" th:src="@{/js/react/babel.min.js}"></script>
     <div th:replace="fragments/header :: header">
         <a href="fragments/header.html">Header</a> fragment will go here
     </div>
@@ -41,9 +44,9 @@
         </main>
     </div>
 
-    <div th:replace="fragments/footer :: footer">
-        <a href="fragments/footer.html">Footer</a> fragment will go here
-    </div>
+<!--    <div th:replace="fragments/footer :: footer">-->
+<!--        <a href="fragments/footer.html">Footer</a> fragment will go here-->
+<!--    </div>-->
 
 </body>
 
