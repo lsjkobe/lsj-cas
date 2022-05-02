@@ -1,4 +1,4 @@
-package org.apereo.cas.config.custom.auth.handler;
+package org.apereo.cas.config.custom.auth.configuration.flow.lsjtest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Slf4j
-public class MyAuthenticationHandler extends AbstractUsernamePasswordAuthenticationHandler {
+public class LsjTestAuthenticationHandler extends AbstractUsernamePasswordAuthenticationHandler {
 
 
-    public MyAuthenticationHandler(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
+    public LsjTestAuthenticationHandler(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
         super(name, servicesManager, principalFactory, order);
     }
 

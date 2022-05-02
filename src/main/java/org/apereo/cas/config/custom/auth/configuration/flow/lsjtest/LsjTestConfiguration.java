@@ -1,8 +1,10 @@
-package org.apereo.cas.config.custom.auth.configuration.flow;
+package org.apereo.cas.config.custom.auth.configuration.flow.lsjtest;
 
 import lombok.val;
+import org.apereo.cas.authentication.principal.DefaultPrincipalFactory;
 import org.apereo.cas.config.custom.auth.constant.IFlowConstant;
 import org.apereo.cas.configuration.CasConfigurationProperties;
+import org.apereo.cas.services.ServicesManager;
 import org.apereo.cas.util.crypto.CipherExecutor;
 import org.apereo.cas.web.flow.*;
 import org.apereo.cas.web.flow.executor.WebflowExecutorFactory;
@@ -46,6 +48,27 @@ public class LsjTestConfiguration {
 
     @Resource
     private CipherExecutor webflowCipherExecutor;
+
+    @Resource
+    private ServicesManager servicesManager;
+
+    @Bean
+    public CasWebflowConfigurer customCasWebFlowConfigurer() {
+        LsjTestLoginWebflowConfigurer configurer = new LsjTestLoginWebflowConfigurer(
+                flowBuilderServices, lsjtestFlowRegistry(), applicationContext, casProperties);
+        configurer.initialize();
+        return configurer;
+    }
+
+    /**
+     * 处理器.
+     * @return .
+     */
+    @Bean
+    public LsjTestAuthenticationHandler lsjTestAuthenticationHandler() {
+        return new LsjTestAuthenticationHandler(
+                LsjTestAuthenticationHandler.class.getName(), servicesManager, new DefaultPrincipalFactory(), 1);
+    }
 
     @Bean
     @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)

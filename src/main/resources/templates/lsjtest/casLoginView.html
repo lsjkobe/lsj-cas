@@ -18,8 +18,8 @@
         <section id="loginForm"
                  th:if="${loginFormViewable and loginFormEnabled}"
                  class="login-section login-form card-body">
-            <div th:replace="fragments/loginform :: loginform">
-                <a href="fragments/loginform.html">Login Form goes here</a>
+            <div th:replace="logintest/loginform :: loginform">
+                <a href="logintest/loginform.html">Login Form goes here</a>
             </div>
         </section>
         <span th:if="${#bools.isFalse(delegatedAuthenticationDynamicProviderSelection)}">
