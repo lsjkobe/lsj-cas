@@ -2,7 +2,6 @@ package org.apereo.cas.config.custom.auth.configuration.flow.lsjtest;
 
 import lombok.val;
 import org.apereo.cas.config.custom.auth.constant.IFlowConstant;
-import org.apereo.cas.config.custom.auth.credential.CustomCredential;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.util.CollectionUtils;
 import org.apereo.cas.web.flow.CasWebflowConstants;
@@ -46,8 +45,8 @@ public class LsjTestLoginWebflowConfigurer extends DefaultLoginWebflowConfigurer
 
         val state = createViewState(flow, CasWebflowConstants.STATE_ID_VIEW_LOGIN_FORM, "lsjtest/casLoginView", binder);
         state.getRenderActionList().add(createEvaluateAction(CasWebflowConstants.ACTION_ID_RENDER_LOGIN_FORM));
-        createStateModelBinding(state, CasWebflowConstants.VAR_ID_CREDENTIAL, CustomCredential.class);
-        createFlowVariable(flow, CasWebflowConstants.VAR_ID_CREDENTIAL, CustomCredential.class);
+        createStateModelBinding(state, CasWebflowConstants.VAR_ID_CREDENTIAL, LsjTestCredential.class);
+        createFlowVariable(flow, CasWebflowConstants.VAR_ID_CREDENTIAL, LsjTestCredential.class);
         bindCredential(flow, state);
     }
 

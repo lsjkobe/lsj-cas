@@ -9,7 +9,6 @@ import org.apereo.cas.authentication.credential.UsernamePasswordCredential;
 import org.apereo.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
 import org.apereo.cas.authentication.principal.Principal;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
-import org.apereo.cas.config.custom.auth.credential.CustomCredential;
 import org.apereo.cas.services.ServicesManager;
 
 import java.security.GeneralSecurityException;
@@ -49,6 +48,6 @@ public class LsjTestAuthenticationHandler extends AbstractUsernamePasswordAuthen
 
     @Override
     public boolean supports(Credential credential) {
-        return credential instanceof CustomCredential;
+        return credential instanceof LsjTestCredential;
     }
 }
