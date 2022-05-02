@@ -3,11 +3,9 @@ package org.apereo.cas.config.custom.auth.configuration;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.principal.DefaultPrincipalFactory;
-import org.apereo.cas.config.custom.auth.handler.MobileIdAuthenticationHandler;
 import org.apereo.cas.config.custom.auth.handler.MyAuthenticationHandler;
 import org.apereo.cas.services.ServicesManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class CasHandlerConfiguration implements AuthenticationEventExecutionPlanConfigurer {
 
     @Autowired
-    @Qualifier(value = "servicesManager")
     private ServicesManager servicesManager;
 
     /**
@@ -24,20 +21,13 @@ public class CasHandlerConfiguration implements AuthenticationEventExecutionPlan
      * @param plan the plan
      */
     @Override
-    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) throws Exception {
+    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
         plan.registerAuthenticationHandler(myAuthenticationHandler());
-        plan.registerAuthenticationHandler(mobileIdAuthenticationHandler());
     }
 
     @Bean
     public MyAuthenticationHandler myAuthenticationHandler() {
         return new MyAuthenticationHandler(
                 MyAuthenticationHandler.class.getName(), servicesManager, new DefaultPrincipalFactory(), 1);
-    }
-
-    @Bean
-    public MobileIdAuthenticationHandler mobileIdAuthenticationHandler() {
-        return new MobileIdAuthenticationHandler(
-                MobileIdAuthenticationHandler.class.getName(), servicesManager, new DefaultPrincipalFactory(), 1);
     }
 }

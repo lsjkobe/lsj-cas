@@ -17,11 +17,11 @@ buildscript {
             }
           }
         }
-        maven { url 'https://repo1.maven.org/maven2'}
         maven {url "https://maven.aliyun.com/repository/central"}
         maven {url "https://maven.aliyun.com/repository/public"}
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://repo1.maven.org/maven2'}
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
@@ -143,9 +143,11 @@ dependencies {
 //    json注入service
     implementation "org.apereo.cas:cas-server-support-json-service-registry:${project.'cas.version'}"
 
-    implementation "org.apereo.cas:cas-server-support-themes:6.6.0-RC2"
-    implementation "org.apereo.cas:cas-server-support-themes-collection:6.6.0-RC2"
-    implementation "org.apereo.cas:cas-server-support-themes-core:6.6.0-RC2"
+    implementation "org.apereo.cas:cas-server-core-util-api:${project.'cas.version'}"
+
+//    implementation "org.apereo.cas:cas-server-support-themes:6.6.0-RC2"
+//    implementation "org.apereo.cas:cas-server-support-themes-collection:6.6.0-RC2"
+//    implementation "org.apereo.cas:cas-server-support-themes-core:6.6.0-RC2"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")

@@ -1,0 +1,14 @@
+{
+  "@class": "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId": "^(https|imaps|http)://(localhost|sso.client.com).*",
+  "name": "LSJ测试",
+  "theme": "lsjtest",
+  "id": 100,
+  "description": "LSJ测试",
+  "evaluationOrder": 10,
+  "accessStrategy" : {
+    "@class" : "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+    "enabled" : true,
+    "ssoEnabled" : true
+  }
+}
