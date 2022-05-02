@@ -39,6 +39,8 @@ cas:
     name: sso.leoli.top:443
   theme:
     default-theme-name: lsjtest
+  view:
+    template-prefixes: classpath:templates
 
 
 

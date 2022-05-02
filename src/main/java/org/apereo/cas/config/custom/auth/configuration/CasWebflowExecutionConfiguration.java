@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 
+import javax.annotation.Resource;
+
 @Configuration("CustomCasWebflowExecutionConfiguration")
 @EnableConfigurationProperties({CasConfigurationProperties.class})
 public class CasWebflowExecutionConfiguration implements CasWebflowExecutionPlanConfigurer {
@@ -21,10 +23,10 @@ public class CasWebflowExecutionConfiguration implements CasWebflowExecutionPlan
     @Autowired
     private ConfigurableApplicationContext applicationContext;
 
-    @Autowired
+    @Resource
     private FlowBuilderServices flowBuilderServices;
 
-    @Autowired
+    @Resource
     private FlowDefinitionRegistry lsjtestFlowRegistry;
 
     /**
