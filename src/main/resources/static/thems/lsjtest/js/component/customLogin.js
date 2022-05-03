@@ -24,6 +24,7 @@ class Demo extends React.Component {
                 return;
             }
             console.log("Get form value:", values);
+            $('#custom-login-form').attr('action', "lsjtest");
         };
 
         this.sendCode = (values, errors) => {
@@ -42,18 +43,31 @@ class Demo extends React.Component {
         };
     }
 
+    onSubmit(e, errors) {
+        console.log("onsubmit");
+    }
+
+    getKey() {
+        return document.getElementById("execution-key").value;
+    }
+
     render() {
         const {code} = this.state;
         return (
             <Form
+                id="custom-login-form"
                 style={{width: 400}}
                 {...formItemLayout}
                 labelTextAlign="left"
                 size="large"
                 labelAlign="inset"
+                action={"lsjtest"}
+                onSubmit={this.onSubmit.bind(this)}
+                method="post"
             >
+                <input type="hidden" name="execution" value={this.getKey()}/>
                 <FormItem name="username" label="用户名" required asterisk={false}>
-                    <Input trim/>
+                    <Input name="username" trim/>
                 </FormItem>
                 <FormItem
                     name="password"
@@ -61,10 +75,11 @@ class Demo extends React.Component {
                     required
                     asterisk={false}
                 >
-                    <Input trim/>
+                    <Input name="password" trim/>
                 </FormItem>
                 <FormItem label=" ">
                     <Form.Submit
+                        htmlType="submit"
                         style={{width: "100%"}}
                         type="primary"
                         validate
