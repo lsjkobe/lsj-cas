@@ -53,7 +53,7 @@ public class LsjTestConfiguration {
     private ServicesManager servicesManager;
 
     @Bean
-    public CasWebflowConfigurer customCasWebFlowConfigurer() {
+    public CasWebflowConfigurer lsjTestLoginWebflowConfigurer() {
         LsjTestLoginWebflowConfigurer configurer = new LsjTestLoginWebflowConfigurer(
                 flowBuilderServices, lsjtestFlowRegistry(), applicationContext, casProperties);
         configurer.initialize();
