@@ -66,6 +66,8 @@ class Demo extends React.Component {
                 method="post"
             >
                 <input type="hidden" name="execution" value={this.getKey()}/>
+                <input type="hidden" name="_eventId" value="submit"/>
+                <input type="hidden" name="geolocation"/>
                 <FormItem name="username" label="用户名" required asterisk={false}>
                     <Input name="username" trim/>
                 </FormItem>
