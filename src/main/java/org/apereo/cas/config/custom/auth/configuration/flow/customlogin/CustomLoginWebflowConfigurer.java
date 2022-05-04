@@ -51,6 +51,17 @@ public class CustomLoginWebflowConfigurer extends AbstractDefaultLoginWebflowCon
         createTransition(state);
     }
 
+    /**
+     * Create generic login success end state.
+     *
+     * @param flow the flow
+     */
+    protected void createGenericLoginSuccessEndState(final Flow flow) {
+        String successViewId = IFlowConstant.FLOW_ID_CUSTOM_LOGIN + "/" + IFlowConstant.FLOW_VIEW_SUCCESS;
+        val state = createEndState(flow, CasWebflowConstants.STATE_ID_VIEW_GENERIC_LOGIN_SUCCESS, successViewId);
+        state.getEntryActionList().add(createEvaluateAction(CasWebflowConstants.ACTION_ID_GENERIC_SUCCESS_VIEW));
+    }
+
     protected void createTransition(ViewState state) {
         //transition
         val transition = createTransitionForState(state, CasWebflowConstants.TRANSITION_ID_SUBMIT, CasWebflowConstants.STATE_ID_REAL_SUBMIT);
