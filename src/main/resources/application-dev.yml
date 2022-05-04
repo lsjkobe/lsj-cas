@@ -33,14 +33,18 @@ cas:
     json:
       location: classpath:services
 
-
-
   server:
     name: sso.leoli.top:443
   theme:
     default-theme-name: lsjtest
   view:
     template-prefixes: classpath:templates
+#link ->ServiceTicketProperties
+  ticket:
+    st:
+      timeToKillInSeconds: 30
+
+#      自定义tgt 参考方法DefaultTicketGrantingTicketFactory#getTicketGrantingTicketExpirationPolicy
 
 
 
