@@ -1,5 +1,7 @@
 package org.apereo.cas.config.custom.auth.configuration;
 
+import org.apereo.cas.config.custom.auth.configuration.flow.customlogin.CustomLoginWebflowConfigurer;
+import org.apereo.cas.config.custom.auth.configuration.flow.lsjtest.LsjTestLoginWebflowConfigurer;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.web.flow.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,7 +14,10 @@ import javax.annotation.Resource;
 public class CasWebflowExecutionConfiguration implements CasWebflowExecutionPlanConfigurer {
 
     @Resource
-    private CasWebflowConfigurer customCasWebFlowConfigurer;
+    private LsjTestLoginWebflowConfigurer lsjTestLoginWebflowConfigurer;
+
+    @Resource
+    private CustomLoginWebflowConfigurer customLoginWebflowConfigurer;
 
     /**
      * Configure webflow execution plan.
@@ -21,7 +26,8 @@ public class CasWebflowExecutionConfiguration implements CasWebflowExecutionPlan
      */
     @Override
     public void configureWebflowExecutionPlan(CasWebflowExecutionPlan plan) {
-        plan.registerWebflowConfigurer(customCasWebFlowConfigurer);
+        plan.registerWebflowConfigurer(lsjTestLoginWebflowConfigurer);
+        plan.registerWebflowConfigurer(customLoginWebflowConfigurer);
     }
 
 }

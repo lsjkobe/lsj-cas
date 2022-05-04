@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>loginProviders Fragment</title>
+    <link href="../../static/css/cas.css" rel="stylesheet" th:remove="tag"/>
+</head>
+<body>
+<main role="main" class="container mt-3 mb-3">
+    <div th:fragment="custom-login-form" th:remove="tag">
+        <div>
+            <script type="text/javascript" th:src="@{/js/qrcode/qrcode.js}"></script>
+            <div id="custom-login"> </div>
+            <script type="text/babel" th:src="@{/thems/custom-login/js/custom-login.js}">
+            </script>
+            <input type="hidden" name="execution" th:value="${flowExecutionKey}" id="execution-key"/>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

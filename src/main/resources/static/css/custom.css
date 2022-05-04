@@ -1,0 +1,35 @@
+.box-400-200 {
+    /*background: #5584FF;*/
+    width: 400px;
+    height: 200px;
+    border: 1px solid #ddd;
+}
+
+.box-400-250 {
+    /*background: #5584FF;*/
+    width: 400px;
+    height: 250px;
+    border: 1px solid #ddd;
+}
+
+.box-450-250 {
+    /*background: #5584FF;*/
+    width: 450px;
+    height: 250px;
+    border: 1px solid #ddd;
+}
+
+.box-450-300 {
+    /*background: #5584FF;*/
+    width: 450px;
+    height: 300px;
+    border: 1px solid #ddd;
+}
+
+.box-450-400 {
+    /*background: #5584FF;*/
+    width: 450px;
+    height: 400px;
+    border: 1px solid #ddd;
+}
+

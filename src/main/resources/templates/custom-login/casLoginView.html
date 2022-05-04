@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title th:text="#{cas.login.pagetitle}">CAS Login View</title>
+    <link href="../../static/css/cas.css" rel="stylesheet" th:remove="tag"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/thems/custom-login/css/custom-login.css}" />
+
+</head>
+
+<body class="login mdc-typography">
+<div layout:fragment="content" class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center flex-md-row flex-column mdc-card mdc-card-content card flex-grow-1">
+        <section id="custom-login-section" class="login-section login-qr d-xs-none d-md-block">
+            <div th:replace="custom-login/custom-login-form :: custom-login-form">
+                <a href="custom-login/custom-login-form.html">custom-login-form</a>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+
+</html>
