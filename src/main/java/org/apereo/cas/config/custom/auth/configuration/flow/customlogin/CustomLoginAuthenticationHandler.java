@@ -13,8 +13,7 @@ import org.apereo.cas.config.custom.auth.configuration.flow.lsjtest.LsjTestCrede
 import org.apereo.cas.services.ServicesManager;
 
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 @Slf4j
 public class CustomLoginAuthenticationHandler extends AbstractUsernamePasswordAuthenticationHandler {
@@ -36,7 +35,11 @@ public class CustomLoginAuthenticationHandler extends AbstractUsernamePasswordAu
     @Override
     protected AuthenticationHandlerExecutionResult authenticateUsernamePasswordInternal(UsernamePasswordCredential credential, String originalPassword) throws GeneralSecurityException, PreventedException {
         String username = credential.getUsername();
-        Principal principal = this.principalFactory.createPrincipal(username, new HashMap<>());
+        Map<String, List<Object>> map = new HashMap<>();
+        map.put("username", List.of(username));
+        map.put("age", List.of(12));
+        map.put("sexy", List.of(1));
+        Principal principal = this.principalFactory.createPrincipal(username, map);
         return createHandlerResult(credential, principal, new ArrayList<>(0));
     }
 

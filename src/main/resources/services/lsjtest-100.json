@@ -6,9 +6,19 @@
   "id": 100,
   "description": "LSJ测试",
   "evaluationOrder": 10,
-  "accessStrategy" : {
-    "@class" : "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
-    "enabled" : true,
-    "ssoEnabled" : true
+  "accessStrategy": {
+    "@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+    "enabled": true,
+    "ssoEnabled": true
+  },
+  "attributeReleasePolicy": {
+    "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+    "allowedAttributes": [
+      "java.util.ArrayList",
+      [
+        "username",
+        "age"
+      ]
+    ]
   }
 }
