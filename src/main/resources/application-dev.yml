@@ -43,8 +43,17 @@ cas:
   ticket:
     st:
       timeToKillInSeconds: 30
-
 #      自定义tgt 参考方法DefaultTicketGrantingTicketFactory#getTicketGrantingTicketExpirationPolicy
+#    RedisTicketRegistryProperties
+    registry:
+      redis:
+        enabled: true
+        host: localhost
+        port: 6379
+        password:
+        database: 0
+        use-ssl: false
+        read-from: MASTER
 
 
 

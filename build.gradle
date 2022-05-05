@@ -148,6 +148,12 @@ dependencies {
 
     implementation "org.apereo.cas:cas-server-core:${project.'cas.version'}"
 
+    // 增加票据存储redis相关包
+    implementation "org.apereo.cas:cas-server-support-redis-ticket-registry:${project.'cas.version'}"
+
+    //action
+    implementation "org.apereo.cas:cas-server-support-actions:${project.'cas.version'}"
+
 //    implementation "org.apereo.cas:cas-server-support-themes:6.6.0-RC2"
 //    implementation "org.apereo.cas:cas-server-support-themes-collection:6.6.0-RC2"
 //    implementation "org.apereo.cas:cas-server-support-themes-core:6.6.0-RC2"
