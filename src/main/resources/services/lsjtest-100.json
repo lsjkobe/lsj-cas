@@ -5,20 +5,13 @@
   "theme": "lsjtest",
   "id": 100,
   "description": "LSJ测试",
-  "evaluationOrder": 10,
+  "evaluationOrder": 1000,
   "accessStrategy": {
     "@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
     "enabled": true,
     "ssoEnabled": true
   },
   "attributeReleasePolicy": {
-    "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
-    "allowedAttributes": [
-      "java.util.ArrayList",
-      [
-        "username",
-        "age"
-      ]
-    ]
+    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
   }
 }

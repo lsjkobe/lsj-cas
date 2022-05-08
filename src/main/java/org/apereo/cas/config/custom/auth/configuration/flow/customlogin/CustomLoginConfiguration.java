@@ -1,9 +1,18 @@
 package org.apereo.cas.config.custom.auth.configuration.flow.customlogin;
 
 import lombok.val;
+import org.apache.commons.lang3.StringUtils;
+import org.apereo.cas.adaptors.jdbc.AbstractJdbcUsernamePasswordAuthenticationHandler;
+import org.apereo.cas.authentication.*;
 import org.apereo.cas.authentication.principal.DefaultPrincipalFactory;
+import org.apereo.cas.authentication.principal.PrincipalNameTransformerUtils;
+import org.apereo.cas.authentication.support.password.PasswordEncoderUtils;
+import org.apereo.cas.authentication.support.password.PasswordPolicyContext;
 import org.apereo.cas.config.custom.auth.constant.IFlowConstant;
 import org.apereo.cas.configuration.CasConfigurationProperties;
+import org.apereo.cas.configuration.model.support.jdbc.authn.BaseJdbcAuthenticationProperties;
+import org.apereo.cas.configuration.model.support.jdbc.authn.QueryJdbcAuthenticationProperties;
+import org.apereo.cas.configuration.support.JpaBeans;
 import org.apereo.cas.services.ServicesManager;
 import org.apereo.cas.util.crypto.CipherExecutor;
 import org.apereo.cas.web.flow.*;
@@ -24,9 +33,13 @@ import org.springframework.webflow.execution.FlowExecutionListener;
 import org.springframework.webflow.executor.FlowExecutor;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-@Configuration
-public class CustomLoginConfiguration {
+@Configuration("CustomLoginConfiguration")
+public class CustomLoginConfiguration implements AuthenticationEventExecutionPlanConfigurer {
 
     private static final FlowExecutionListener[] FLOW_EXECUTION_LISTENERS = new FlowExecutionListener[0];
 
@@ -52,6 +65,26 @@ public class CustomLoginConfiguration {
     @Resource
     private ServicesManager servicesManager;
 
+    @Resource
+    private PasswordPolicyContext queryPasswordPolicyConfiguration;
+
+    /**
+     * 注册验证处理器.
+     * @param plan the plan .
+     */
+    @Override
+    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
+        List<AuthenticationHandler> customHandlerList = new ArrayList<>();
+        List<QueryJdbcAuthenticationProperties> query = casProperties.getAuthn().getJdbc().getQuery();
+        for (QueryJdbcAuthenticationProperties jdbcProperties : query) {
+            CustomQueryDBAuthenticationHandler handler = customQueryDBAuthenticationHandler(jdbcProperties);
+            customHandlerList.add(handler);
+        }
+        for (AuthenticationHandler handler : customHandlerList) {
+            plan.registerAuthenticationHandler(handler);
+        }
+    }
+
     @Bean
     public CasWebflowConfigurer customLoginWebflowConfigurer() {
         CustomLoginWebflowConfigurer configurer = new CustomLoginWebflowConfigurer(
@@ -65,10 +98,33 @@ public class CustomLoginConfiguration {
      *
      * @return .
      */
-    @Bean
-    public CustomLoginAuthenticationHandler customLoginAuthenticationHandler() {
-        return new CustomLoginAuthenticationHandler(
-                CustomLoginAuthenticationHandler.class.getName(), servicesManager, new DefaultPrincipalFactory(), 1);
+    public CustomQueryDBAuthenticationHandler customQueryDBAuthenticationHandler(QueryJdbcAuthenticationProperties jdbcProperties) {
+        String name = jdbcProperties.getProperties().get(CustomQueryDBAuthenticationHandler.JPA_PROPERTIES_CUSTOM_NAME);
+        String customOrder = jdbcProperties.getProperties().get(CustomQueryDBAuthenticationHandler.JPA_PROPERTIES_CUSTOM_ORDER);
+        int orderInt = jdbcProperties.getOrder();
+        if (StringUtils.isBlank(name)) {
+            name = CustomQueryDBAuthenticationHandler.class.getName();
+        }
+        if (StringUtils.isNotBlank(customOrder)) {
+            orderInt = Integer.parseInt(customOrder);
+        }
+        CustomQueryDBAuthenticationHandler handler =
+                new CustomQueryDBAuthenticationHandler(name, servicesManager, new DefaultPrincipalFactory(), orderInt,
+                jdbcProperties, JpaBeans.newDataSource(jdbcProperties));
+        configureJdbcAuthenticationHandler(handler, jdbcProperties, applicationContext);
+        return handler;
+    }
+
+    private void configureJdbcAuthenticationHandler(final AbstractJdbcUsernamePasswordAuthenticationHandler handler,
+                                                           final BaseJdbcAuthenticationProperties properties,
+                                                           final ConfigurableApplicationContext applicationContext) {
+        handler.setPasswordEncoder(PasswordEncoderUtils.newPasswordEncoder(properties.getPasswordEncoder(), applicationContext));
+        handler.setPrincipalNameTransformer(PrincipalNameTransformerUtils.newPrincipalNameTransformer(properties.getPrincipalTransformation()));
+        handler.setPasswordPolicyConfiguration(queryPasswordPolicyConfiguration);
+        handler.setState(properties.getState());
+        if (StringUtils.isNotBlank(properties.getCredentialCriteria())) {
+            handler.setCredentialSelectionPredicate(CoreAuthenticationUtils.newCredentialSelectionPredicate(properties.getCredentialCriteria()));
+        }
     }
 
     @Bean

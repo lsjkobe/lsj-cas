@@ -1,6 +1,8 @@
 package org.apereo.cas.config.custom.auth.configuration.flow.lsjtest;
 
 import lombok.val;
+import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
+import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.principal.DefaultPrincipalFactory;
 import org.apereo.cas.config.custom.auth.constant.IFlowConstant;
 import org.apereo.cas.configuration.CasConfigurationProperties;
@@ -26,7 +28,7 @@ import org.springframework.webflow.executor.FlowExecutor;
 import javax.annotation.Resource;
 
 @Configuration
-public class LsjTestConfiguration {
+public class LsjTestConfiguration implements AuthenticationEventExecutionPlanConfigurer {
 
     private static final FlowExecutionListener[] FLOW_EXECUTION_LISTENERS = new FlowExecutionListener[0];
 
@@ -52,6 +54,11 @@ public class LsjTestConfiguration {
     @Resource
     private ServicesManager servicesManager;
 
+    @Override
+    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) throws Exception {
+        plan.registerAuthenticationHandler(lsjTestAuthenticationHandler());
+    }
+
     @Bean
     public CasWebflowConfigurer lsjTestLoginWebflowConfigurer() {
         LsjTestLoginWebflowConfigurer configurer = new LsjTestLoginWebflowConfigurer(
@@ -64,7 +71,6 @@ public class LsjTestConfiguration {
      * 处理器.
      * @return .
      */
-    @Bean
     public LsjTestAuthenticationHandler lsjTestAuthenticationHandler() {
         return new LsjTestAuthenticationHandler(
                 LsjTestAuthenticationHandler.class.getName(), servicesManager, new DefaultPrincipalFactory(), 1);
@@ -103,4 +109,5 @@ public class LsjTestConfiguration {
                 lsjtestFlowRegistry(), webflowCipherExecutor, FLOW_EXECUTION_LISTENERS);
         return factory.build();
     }
+
 }

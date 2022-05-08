@@ -137,6 +137,9 @@ dependencies {
     implementation "org.apereo.cas:cas-server-support-jdbc:${project.'cas.version'}"
 
 //    auth
+    // https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-jdbc-authentication
+    implementation "org.apereo.cas:cas-server-support-jdbc-authentication:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-support-jpa-util:${project.'cas.version'}"
     implementation "org.apereo.cas:cas-server-core-authentication-api:${project.'cas.version'}"
     implementation "org.apereo.cas:cas-server-core-configuration-api:${project.'cas.version'}"
     implementation "org.apereo.cas:cas-server-core-webflow:${project.'cas.version'}"
