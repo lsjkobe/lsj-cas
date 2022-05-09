@@ -1,5 +1,5 @@
 {
-  "@class": "org.apereo.cas.services.RegexRegisteredService",
+  "@class": "org.apereo.cas.services.CasRegisteredService",
   "serviceId": "^(https|imaps|http)://(localhost|sso.client.com).*",
   "name": "LSJ测试",
   "theme": "lsjtest",
@@ -12,6 +12,12 @@
     "ssoEnabled": true
   },
   "attributeReleasePolicy": {
-    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy",
+    "excludedAttributes": [
+      "java.util.HashSet",
+      [
+        "pwd"
+      ]
+    ]
   }
 }

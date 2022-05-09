@@ -1,6 +1,5 @@
 package org.apereo.cas.config.custom.auth.configuration.flow.customlogin;
 
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.apache.commons.lang3.BooleanUtils;
@@ -146,7 +145,9 @@ public class CustomQueryDBAuthenticationHandler extends AbstractJdbcUsernamePass
 
     private void allDbFieldToAttributes(final Map<String, List<Object>> attributes, final Map<String, Object> dbFields) {
         dbFields.forEach((key, attribute) -> {
-            attributes.put(key, CollectionUtils.wrap(attribute.toString()));
+            if (attribute != null) {
+                attributes.put(key, CollectionUtils.wrap(attribute.toString()));
+            }
         });
     }
 

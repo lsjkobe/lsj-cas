@@ -1,9 +1,9 @@
 server:
   ssl:
     enabled: true
-#    key-store: classpath:thekeystore
-#    key-store-password: li936339745
-#    key-password: li936339745
+    #    key-store: classpath:thekeystore
+    #    key-store-password: li936339745
+    #    key-password: li936339745
     key-store: classpath:7619605_sso.leoli.top.pfx
     key-store-password: yy5ChUqe
     key-password: yy5ChUqe
@@ -13,21 +13,34 @@ cas:
   authn:
     jdbc:
       query:
-        - driver-class: org.mariadb.jdbc.Driver
+        - name: QueryDatabaseAuthenticationHandler
+          driver-class: org.mariadb.jdbc.Driver
           url: jdbc:mariadb://120.24.108.229:3306/lsj_user?characterEncoding=UTF-8&application-name=cas
           user: root
           password: root
-          sql: select pwd from t_user_info where userid=?
+          sql: > 
+            select pwd, user_name, nick_name, phone , birthday , sexy , avatar_url , email , created_time , 
+            updated_time ,disabled , expired from t_user_info where user_id=?
           field-password: pwd
+          field-disabled: disabled
+          field-expired: expired
           password-encoder:
-#            type: DEFAULT
-#            encoding-algorithm: MD5
+            #            type: DEFAULT
+            #            encoding-algorithm: MD5
             type: SCRYPT
-          order: 100
-##设置安全为true
+          order: 10000
+          properties:
+#            isAllAttribute为true时转换所有用户属性字段
+            "isAllAttribute": true
+            #            自定义handler名字，由于使用name的值的话会和官方提供的QueryDatabaseAuthenticationHandler相同导致自定义的失败，所以新增自定义handler名
+            "customName": "CustomQueryDBAuthenticationHandler"
+            "customOrder": 100
+#          配合properties->isAllAttribute,当isAllAttribute为false时，仅仅转换以下principal-attribute-list配置的属性
+#          principal-attribute-list: user_name:user_name,sexy:sexy
+  ##设置安全为true
   tgc:
     secure: true
-##开启识别json文件，默认false
+  ##开启识别json文件，默认false
   serviceRegistry:
     initFromJson: true
     json:
@@ -39,18 +52,18 @@ cas:
     default-theme-name: lsjtest
   view:
     template-prefixes: classpath:templates
-#link ->ServiceTicketProperties
+  #link ->ServiceTicketProperties
   ticket:
     st:
       timeToKillInSeconds: 30
-#      自定义tgt 参考方法DefaultTicketGrantingTicketFactory#getTicketGrantingTicketExpirationPolicy
-#    RedisTicketRegistryProperties
+    #      自定义tgt 参考方法DefaultTicketGrantingTicketFactory#getTicketGrantingTicketExpirationPolicy
+    #    RedisTicketRegistryProperties
     registry:
       redis:
         enabled: true
-        host: localhost
+        host: 120.24.108.229
         port: 6379
-        password:
+        password: lsjkobe_24
         database: 0
         use-ssl: false
         read-from: MASTER
