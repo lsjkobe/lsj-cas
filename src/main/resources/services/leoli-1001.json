@@ -1,0 +1,23 @@
+{
+  "@class": "org.apereo.cas.services.CasRegisteredService",
+  "serviceId": "^(https|imaps|http)://.*",
+  "name": "leoli",
+  "theme": "leoli",
+  "id": 100,
+  "description": "leoli",
+  "evaluationOrder": 999,
+  "accessStrategy": {
+    "@class": "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
+    "enabled": true,
+    "ssoEnabled": true
+  },
+  "attributeReleasePolicy": {
+    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy",
+    "excludedAttributes": [
+      "java.util.HashSet",
+      [
+        "pwd"
+      ]
+    ]
+  }
+}

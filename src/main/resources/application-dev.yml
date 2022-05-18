@@ -55,7 +55,7 @@ cas:
   #link ->ServiceTicketProperties
   ticket:
     st:
-      timeToKillInSeconds: 30
+      timeToKillInSeconds: 300
     #      自定义tgt 参考方法DefaultTicketGrantingTicketFactory#getTicketGrantingTicketExpirationPolicy
     #    RedisTicketRegistryProperties
     registry:
