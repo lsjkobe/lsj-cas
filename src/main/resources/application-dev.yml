@@ -20,7 +20,7 @@ cas:
           password: root
           sql: > 
             select pwd, user_name, nick_name, phone , birthday , sexy , avatar_url , email , created_time , 
-            updated_time ,disabled , expired from t_user_info where user_id=?
+            updated_time ,disabled , expired from t_user_info where login_id=?
           field-password: pwd
           field-disabled: disabled
           field-expired: expired
