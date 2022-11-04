@@ -3,7 +3,7 @@
   "serviceId": "^(https|imaps|http)://.*",
   "name": "leoli",
   "theme": "leoli",
-  "id": 100,
+  "id": 1001,
   "description": "leoli",
   "evaluationOrder": 999,
   "accessStrategy": {

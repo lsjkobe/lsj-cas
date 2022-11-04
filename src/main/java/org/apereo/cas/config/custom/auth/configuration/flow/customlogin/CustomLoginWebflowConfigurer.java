@@ -4,8 +4,8 @@ import lombok.val;
 import org.apereo.cas.config.custom.auth.configuration.flow.AbstractDefaultLoginWebflowConfigurer;
 import org.apereo.cas.config.custom.auth.constant.IFlowConstant;
 import org.apereo.cas.configuration.CasConfigurationProperties;
-import org.apereo.cas.util.CollectionUtils;
 import org.apereo.cas.web.flow.CasWebflowConstants;
+import org.apereo.cas.web.flow.StringToCharArrayConverter;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.Flow;
@@ -13,6 +13,8 @@ import org.springframework.webflow.engine.History;
 import org.springframework.webflow.engine.ViewState;
 import org.springframework.webflow.engine.builder.BinderConfiguration;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
+
+import java.util.Map;
 
 public class CustomLoginWebflowConfigurer extends AbstractDefaultLoginWebflowConfigurer {
     public CustomLoginWebflowConfigurer(FlowBuilderServices flowBuilderServices, FlowDefinitionRegistry flowDefinitionRegistry,
@@ -37,7 +39,11 @@ public class CustomLoginWebflowConfigurer extends AbstractDefaultLoginWebflowCon
      */
     @Override
     protected void createLoginFormView(Flow flow) {
-        val propertiesToBind = CollectionUtils.wrapList("username", "password");
+        //UsernamePasswordCredential的password类型变char了，所以需要StringToCharArrayConverter.ID
+        val propertiesToBind =  Map.of(
+                "username", Map.of("required", "true"),
+                "password", Map.of("converter", StringToCharArrayConverter.ID),
+                "source", Map.of("required", "true"));
         val binder = createStateBinderConfiguration(propertiesToBind);
         casProperties.getView().getCustomLoginFormFields()
                 .forEach((field, props) -> {

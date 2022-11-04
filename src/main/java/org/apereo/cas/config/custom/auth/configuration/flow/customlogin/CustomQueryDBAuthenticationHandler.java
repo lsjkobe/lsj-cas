@@ -46,7 +46,7 @@ public class CustomQueryDBAuthenticationHandler extends AbstractJdbcUsernamePass
     @Override
     protected AuthenticationHandlerExecutionResult authenticateUsernamePasswordInternal(UsernamePasswordCredential credential, String originalPassword) throws GeneralSecurityException, PreventedException {
         val username = credential.getUsername();
-        val password = credential.getPassword();
+        val password = credential.toPassword();
         Map<String, List<Object>> attributes;
         try {
             val dbFields = query(credential);

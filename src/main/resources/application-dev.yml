@@ -14,12 +14,12 @@ cas:
     jdbc:
       query:
         - name: QueryDatabaseAuthenticationHandler
-          driver-class: org.mariadb.jdbc.Driver
-          url: jdbc:mariadb://120.24.108.229:3306/lsj_user?characterEncoding=UTF-8&application-name=cas
+          driver-class: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/lsj_user?characterEncoding=UTF-8&application-name=cas
           user: root
           password: root
           sql: > 
-            select pwd, user_name, nick_name, phone , birthday , sexy , avatar_url , email , created_time , 
+            select login_id, pwd, user_name, nick_name, phone , birthday , sexy , avatar_url , email , created_time , 
             updated_time ,disabled , expired from t_user_info where login_id=?
           field-password: pwd
           field-disabled: disabled

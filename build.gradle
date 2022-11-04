@@ -1,10 +1,4 @@
-import org.apache.tools.ant.taskdefs.condition.*
-import org.gradle.internal.logging.text.*
-import org.apereo.cas.metadata.*
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
-
-import java.nio.file.*
-import static org.gradle.internal.logging.text.StyledTextOutput.Style
 
 buildscript {
     repositories {
@@ -17,12 +11,13 @@ buildscript {
             }
           }
         }
+        maven { url 'https://repo1.maven.org/maven2' }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url "https://maven.aliyun.com/repository/central" }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://repo1.maven.org/maven2' }
+
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
@@ -144,6 +139,7 @@ dependencies {
     implementation "org.apereo.cas:cas-server-core-configuration-api:${project.'cas.version'}"
     implementation "org.apereo.cas:cas-server-core-webflow:${project.'cas.version'}"
     implementation "org.apereo.cas:cas-server-core-webflow-api:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-core-services-authentication:${project.'cas.version'}"
 //    json注入service
     implementation "org.apereo.cas:cas-server-support-json-service-registry:${project.'cas.version'}"
 
